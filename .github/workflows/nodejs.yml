@@ -1,0 +1,17 @@
+name: node
+
+on:
+  schedule:
+    - cron: "*/15 * * * *"
+
+jobs:
+  sandbox:
+    strategy:
+      matrix:
+        target:
+          - hoge
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - run: node -v
