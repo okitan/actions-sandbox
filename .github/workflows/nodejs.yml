@@ -15,4 +15,4 @@ jobs:
     steps:
     - uses: actions/checkout@v1
     - run: node -v
-    - run: git checkout -b ${{ matrix.target }}
+    - run: git checkout "fuga-${{matrix.target}}" || git checkout -b "fuga-${{ matrix.target }}"
