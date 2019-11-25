@@ -16,3 +16,14 @@ jobs:
     - uses: actions/checkout@v1
     - run: node -v
     - run: git checkout "fuga-${{matrix.target}}" || git checkout -b "fuga-${{ matrix.target }}"
+    - run: touch test.txt
+    - run: |
+        if [[ -n "$(git status --porcelain "${file_to_commit}")" ]]; then
+          git add -A .
+          git commit -m "add test.txt"
+          
+          git config user.name okitan
+          git config user.email okitakunio@gmail.com
+          
+          git push origin "fuga-${{ matrix.target}}"
+        fi
