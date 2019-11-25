@@ -25,5 +25,7 @@ jobs:
           git config --global user.name okitan # why global needed
           git config --global user.email okitakunio@gmail.com
           
+          git remote set-url origin "https:/okitan:${{ secrets.GITHUB_TOKEN }}@github.com/okitan/actions-sandbox.git"
+          
           git push origin "fuga-${{ matrix.target}}"
         fi
