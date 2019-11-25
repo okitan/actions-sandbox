@@ -25,7 +25,7 @@ jobs:
           git add -A .
           git commit -m "add test.txt"
           
-          # git remote set-url origin "https:/okitan:${{ secrets.GITHUB_TOKEN }}@github.com/okitan/actions-sandbox.git"
+          git remote set-url origin "https://${{ secrets.GITHUB_TOKEN }}@github.com/okitan/actions-sandbox.git"
           
           git push origin "fuga-${{ matrix.target}}"
         fi
