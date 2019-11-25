@@ -18,7 +18,7 @@ jobs:
     - run: git checkout "fuga-${{matrix.target}}" || git checkout -b "fuga-${{ matrix.target }}"
     - run: touch test.txt
     - run: |
-        if [[ -n "$(git status --porcelain . ]]; then
+        if [[ -n "$(git status --porcelain .)" ]]; then
           git add -A .
           git commit -m "add test.txt"
           
