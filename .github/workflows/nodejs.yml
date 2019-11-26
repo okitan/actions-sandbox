@@ -14,8 +14,6 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-      with:
-        ref: a-branch
     - run: node -v
     - run: git checkout "fuga-${{matrix.target}}" || git checkout -b "fuga-${{ matrix.target }}"
     - run: touch test.txt
