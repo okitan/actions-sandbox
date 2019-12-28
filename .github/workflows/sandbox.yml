@@ -1,6 +1,8 @@
-name: node
+name: sandbox
 
 on:
+  repository_dispatch:
+    types: [sandbox]
   schedule:
     - cron: "*/15 * * * *"
 
