@@ -2,7 +2,7 @@ name: events dispatched
 
 on:
   repository_dispatch:
-    event_type: test-dispatch    
+    types: [test-dispatch]
 
 jobs:
   build:
