@@ -10,5 +10,6 @@ jobs:
     steps:
       - name: show variables
         run: |
+          echo "whole event: ${{ toJson(github.event) }}"
           echo "event_type: ${{ github.event.event_type }}"
           echo "payload: ${{ toJson(github.event.client_payload) }}"
