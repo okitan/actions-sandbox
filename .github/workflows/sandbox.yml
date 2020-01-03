@@ -15,13 +15,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - run: node -v
-    - run: git checkout "fuga-${{matrix.target}}" || git checkout -b "fuga-${{ matrix.target }}"
+    - uses: actions/checkout@v2
+    - run: git branch
+    - run: git switch "fuga-${{matrix.target}}" || git switch -b "fuga-${{ matrix.target }}"
     - run: touch test.txt
     - run: |
         if [[ -n "$(git status --porcelain .)" ]]; then
-          git config user.name okitan # why global needed
+          git config user.name okitan
           git config user.email okitakunio@gmail.com
 
           git add -A .
