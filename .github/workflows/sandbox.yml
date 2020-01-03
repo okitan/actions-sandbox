@@ -20,7 +20,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - run: git branch
-    - run: git switch "fuga-${{matrix.target}}" || git switch -b "fuga-${{ matrix.target }}"
+    - run: git switch "fuga-${{matrix.target}}" || git switch --orphan "fuga-${{ matrix.target }}"
     - run: touch test.txt
     - run: |
         if [[ -n "$(git status --porcelain .)" ]]; then
