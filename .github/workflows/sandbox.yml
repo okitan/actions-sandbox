@@ -25,7 +25,7 @@ jobs:
             curl -vv \
                 -H "Authorization: token ${{ secrets.MY_GITHUB_TOKEN }}" \
                 -H "Accept: application/vnd.github.everest-preview+json" \ 
-                "https://api.github.com/repos/okitan/actions-sandbox/dispatches"
+                "https://api.github.com/repos/okitan/actions-sandbox/dispatches" \
                 -d '{"event_type": "test-dispatch", "client_payload": {"branch": "{}"}}'
     - run: git switch "fuga-${{matrix.target}}" || git switch --orphan "fuga-${{ matrix.target }}"
     - run: touch test.txt
