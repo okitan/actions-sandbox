@@ -12,13 +12,11 @@ jobs:
       - uses: actions/checkout@v1
         with:
           ref: ${{ github.event.client_payload.branch }}
-      - name: rebase
+      - name: merge
         run: |
-          git branch
-          
           git config user.name okitan
           git config user.email okitakunio@gmail.com
 
-          git rebase origin/master
+          git merge --no-ff origin/master -m "updated master"
           git remote set-url origin "https://okitan:${{ secrets.MY_GITHUB_TOKEN }}@github.com/okitan/actions-sandbox.git"
-          git push -f
+          git push
