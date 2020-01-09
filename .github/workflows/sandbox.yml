@@ -10,32 +10,38 @@ on:
     - cron: "0 0 */1 * *"
 
 jobs:
+  invoke-rebase:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - run: |
+          git branch --remote \
+          | grep -v master \
+          | awk -F "/" '{ print $(2) }' \
+          | xargs -I % -n 1 \
+              curl -vv -H "Authorization: token ${{ secrets.MY_GITHUB_TOKEN }}" -H "Accept: application/vnd.github.everest-preview+json" "https://api.github.com/repos/okitan/actions-sandbox/dispatches" -d '{"event_type": "rebase", "client_payload": {"branch": "%"}}'
+
   sandbox:
     strategy:
       matrix:
         target:
           - hoge
+          - fuga
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-    - run: |
-        git branch --remote \
-        | grep -v master \
-        | awk -F "/" '{ print $(2) }' \
-        | xargs -I {} -n 1 \
-            curl -vv -H "Authorization: token ${{ secrets.MY_GITHUB_TOKEN }}" -H "Accept: application/vnd.github.everest-preview+json" "https://api.github.com/repos/okitan/actions-sandbox/dispatches" -d '{"event_type": "rebase", "client_payload": {"branch": "{}"}}'
-    - run: git switch "fuga-${{matrix.target}}" || git switch --orphan "fuga-${{ matrix.target }}"
-    - run: touch test.txt
-    - run: |
-        if [[ -n "$(git status --porcelain .)" ]]; then
-          git config user.name okitan
-          git config user.email okitakunio@gmail.com
+      - uses: actions/checkout@v1
+      - run: git switch "fuga-${{matrix.target}}" || git switch --orphan "fuga-${{ matrix.target }}"
+      - run: touch test.txt
+      - run: |
+          if [[ -n "$(git status --porcelain .)" ]]; then
+            git config user.name okitan
+            git config user.email okitakunio@gmail.com
 
-          git add -A .
-          git commit -m "add test.txt"
-          
-          git remote set-url origin "https://okitan:${{ secrets.GITHUB_TOKEN }}@github.com/okitan/actions-sandbox.git"
-          
-          git push origin "fuga-${{ matrix.target}}"
-        fi
+            git add -A .
+            git commit -m "add test.txt"
+
+            git remote set-url origin "https://okitan:${{ secrets.MY_GITHUB_TOKEN }}@github.com/okitan/actions-sandbox.git"
+
+            git push origin
+          fi
