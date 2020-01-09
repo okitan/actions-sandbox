@@ -31,7 +31,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v1
-      - run: git switch "fuga-${{matrix.target}}" || git switch --orphan "fuga-${{ matrix.target }}"
+      - run: git switch "branch-${{ matrix.target }}" || git switch --orphan "branch-${{ matrix.target }}"
       - run: touch test.txt
       - run: |
           if [[ -n "$(git status --porcelain .)" ]]; then
@@ -43,5 +43,5 @@ jobs:
 
             git remote set-url origin "https://okitan:${{ secrets.MY_GITHUB_TOKEN }}@github.com/okitan/actions-sandbox.git"
 
-            git push origin
+            git push origin "branch-${{ matrix.target }}"
           fi
