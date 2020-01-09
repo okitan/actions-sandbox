@@ -1,0 +1,21 @@
+name: CI
+
+on:
+  repository_dispatch:
+    types: [rebase]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          ref: ${{ github.event.client_payload.branch }}
+      - name: rebase
+        run: |
+          git branch
+          git rebase master
+
+          git remote set-url origin "https://okitan:${{ secrets.MY_GITHUB_TOKEN }}@github.com/okitan/actions-sandbox.git"
+          git push -f
