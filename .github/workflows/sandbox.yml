@@ -19,8 +19,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v1
-    - run: git branch --remote
-    - run: xargs -h
+    - run: git branch --remote | xargs -I {} -n echo "branch: {}"
     - run: git switch "fuga-${{matrix.target}}" || git switch --orphan "fuga-${{ matrix.target }}"
     - run: touch test.txt
     - run: |
