@@ -21,6 +21,6 @@ jobs:
           git config user.name okitan
           git config user.email okitakunio@gmail.com
 
-          git merge --no-ff origin/master -m "updated master"
+          git merge --no-ff origin/master --allow-unrelated-histories -m "updated master"
           git remote set-url origin "https://okitan:${{ secrets.MY_GITHUB_TOKEN }}@github.com/okitan/actions-sandbox.git"
           git push
