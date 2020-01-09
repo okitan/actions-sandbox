@@ -16,6 +16,8 @@ jobs:
         run: |
           git branch
           git rebase origin/master
-
+          
+          git config user.name okitan
+          git config user.email okitakunio@gmail.com
           git remote set-url origin "https://okitan:${{ secrets.MY_GITHUB_TOKEN }}@github.com/okitan/actions-sandbox.git"
           git push -f
