@@ -1,4 +1,4 @@
-name: CI
+name: rebase
 
 on:
   repository_dispatch:
@@ -15,7 +15,7 @@ jobs:
       - name: rebase
         run: |
           git branch
-          git rebase master
+          git rebase orgin/master
 
           git remote set-url origin "https://okitan:${{ secrets.MY_GITHUB_TOKEN }}@github.com/okitan/actions-sandbox.git"
           git push -f
