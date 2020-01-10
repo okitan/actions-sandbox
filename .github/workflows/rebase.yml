@@ -1,0 +1,26 @@
+name: rebase
+
+on:
+  repository_dispatch:
+    types: [rebase]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          ref: ${{ github.event.client_payload.branch }}
+      - name: merge
+        run: |
+          set -x
+          
+          git branch -a
+          
+          git config user.name okitan
+          git config user.email okitakunio@gmail.com
+
+          git merge --no-ff origin/master --allow-unrelated-histories -m "updated master"
+          git remote set-url origin "https://okitan:${{ secrets.MY_GITHUB_TOKEN }}@github.com/okitan/actions-sandbox.git"
+          git push
