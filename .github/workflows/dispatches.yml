@@ -1,0 +1,15 @@
+name: events dispatched
+
+on:
+  repository_dispatch:
+    types: [test-dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: show variables
+        run: |
+          echo "event_type: ${{ github.event.action }}"
+          echo "payload: ${{ toJson(github.event.client_payload) }}"
