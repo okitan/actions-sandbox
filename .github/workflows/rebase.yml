@@ -1,4 +1,4 @@
-name: rebase ${{ github.event.client_payload.branch }}
+name: rebase
 
 on:
   repository_dispatch:
