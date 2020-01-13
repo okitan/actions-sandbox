@@ -12,7 +12,7 @@ jobs:
       - run: git branch
       - run: |
           echo "##[set-output name=branch;]$(
-           echo "${{ github.event.ref }}" | awk -F "/" '{ print $(NF - 1) }'
+           echo "${{ github.event.ref }}" | awk -F "/" '{ print $(NF) }'
           )"
         id: branch
       - name: use output of previous step
