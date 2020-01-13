@@ -10,4 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: git branch
-      - run: echo "${{ toJson(github) }}"
+      - run: |
+          echo "##[set-output name=branch;]$(
+           echo "${{ github.event.ref }}" | awk -F "/" '{ print $(NF - 1) }'
+          )"
+        id: branch
+      - name: use output of previous step
+        run: echo "${{ steps.branch.outputs.branch }}"
