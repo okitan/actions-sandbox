@@ -1,0 +1,14 @@
+  
+name: pr
+
+on: [pull_request]
+    
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: show variables
+        run: |
+          echo "${{ toJson(github.event) }}"
