@@ -10,6 +10,12 @@ on:
     - cron: "0 0 */1 * *"
 
 jobs:
+  array:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "{{ contains(["hoge", "fuga"], "fuga") }}"
+          echo "{{ format("[ {0}, {1} ]", ["hoge", "fuga"], "ugu") }}"
   invoke-rebase:
     runs-on: ubuntu-latest
     steps:
