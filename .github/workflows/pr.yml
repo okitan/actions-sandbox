@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v1
       - name: diff
         run: |
-          git diff origin/master
+          git diff --unified=0 origin/master
   build:
     runs-on: ubuntu-latest
 
