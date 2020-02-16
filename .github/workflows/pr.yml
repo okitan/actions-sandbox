@@ -5,6 +5,14 @@ on: [pull_request]
     
 
 jobs:
+  diff:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: diff
+        run: |
+          git diff origin/master
   build:
     runs-on: ubuntu-latest
 
