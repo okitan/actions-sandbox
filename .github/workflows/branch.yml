@@ -10,6 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: git branch
+      - run: git diff --name-only origin
       - run: |
           echo "##[set-output name=branch;]$(
            echo "${{ github.event.ref }}" | awk -F "/" '{ print $(NF) }'
